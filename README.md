@@ -54,9 +54,9 @@ Database:
 
 ## Author
 
-Nousheen
-Computer Science Student
-Aspiring Full Stack Developer
+- Nousheen
+- Computer Science Student
+- Aspiring Full Stack Developer
 
 
 
