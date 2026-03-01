@@ -1,0 +1,183 @@
+/* === Global === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* === Header === */
+header {
+  width: 100%;
+  background: linear-gradient(90deg, #a8edea 0%, #fed6e3 100%);
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+header h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #333;
+}
+
+header .user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+header .username {
+  font-weight: 600;
+  color: #444;
+}
+
+header button {
+  padding: 0.5rem 1rem;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+header button:hover {
+  background: #ffe0ec;
+}
+
+/* === Main Content === */
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem 4rem;
+}
+
+/* === Journal Container === */
+.journal-container {
+  width: 100%;
+  max-width: 900px;
+}
+
+/* === New Entry Section === */
+.new-entry {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.new-entry h2 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.new-entry input,
+.new-entry textarea {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #f9f9f9;
+}
+
+.new-entry button {
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  font-weight: 600;
+  color: #333;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.new-entry button:hover {
+  transform: scale(1.03);
+}
+
+/* === Entries Section === */
+.entries {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+/* === Individual Card === */
+.entry-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.entry-card:hover {
+  transform: translateY(-5px);
+}
+
+.entry-card h3 {
+  text-align: center;
+  margin-bottom: 0.8rem;
+  color: #444;
+}
+
+.entry-card p {
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 0.8rem;
+}
+
+/* === Card Buttons === */
+.entry-card button {
+  width: 100%;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 8px;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.entry-card .edit-btn {
+  background: #b6e2d3;
+}
+
+.entry-card .delete-btn {
+  background: #f9d5d3;
+}
+
+.entry-card .edit-btn:hover {
+  background: #a2d8c4;
+}
+
+.entry-card .delete-btn:hover {
+  background: #f7bcb8;
+}
+
+/* === Footer === */
+footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #555;
+  background: #fdfbfb;
+}

@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Journal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #f3f9ff, #fde2f3);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: #ab90da;
+      color: rgb(247, 244, 244);
+      padding: 1rem 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    header .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header h1 {
+      font-weight: 600;
+      font-size: 1.8rem;
+      margin: 0;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .username {
+      font-weight: 500;
+      font-size: 1rem;
+      color: #fefefe;
+    }
+
+    .btn.logout {
+      background: #e64c78;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.3s ease;
+    }
+
+    .btn.logout:hover {
+      background: #ea6c92;
+    }
+
+    main {
+      flex: 1;
+      width: 90%;
+      max-width: 900px;
+      margin: 2rem auto;
+    }
+
+    .card {
+      background: #ffffffcc;
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #333;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px 14px;
+      margin: 8px 0;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      background-color: #fafafa;
+      transition: all 0.3s ease;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #a3c4f3;
+      background-color: #fff;
+      box-shadow: 0 0 8px rgba(163, 196, 243, 0.3);
+    }
+
+    textarea {
+      resize: vertical;
+      height: 120px;
+    }
+
+    .btn.save {
+      background-color: #bba8db;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 500;
+      width: 100%;
+      transition: background 0.3s ease;
+      margin-top: 0.5rem;
+    }
+
+    .btn.save:hover {
+      background-color: #c2a4f2;
+    }
+
+    .entries-section h2 {
+      margin-bottom: 1.5rem;
+      color: #444;
+    }
+
+    .entries-container {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .entry-card {
+      background: #fffafc;
+      border-left: 5px solid #a3c4f3;
+    }
+
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .entry-title {
+      font-weight: 600;
+      color: #333;
+    }
+
+    .entry-date {
+      font-size: 0.85rem;
+      color: #777;
+    }
+
+    .entry-mood {
+      font-style: italic;
+      color: #555;
+      margin-bottom: 0.5rem;
+    }
+
+    .entry-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .btn {
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: background 0.3s ease;
+    }
+
+    .edit-btn {
+      background: #a3c4f3;
+      color: white;
+    }
+
+    .edit-btn:hover {
+      background: #8bb8f2;
+    }
+
+    .delete-btn {
+      background: #f59db6;
+      color: white;
+    }
+
+    .delete-btn:hover {
+      background: #ef89a8;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem 0;
+      font-size: 0.9rem;
+      color: #555;
+      background: #f3f9ff;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>🌸 My Journal</h1>
+      <div class="user-info">
+        <span id="userGreeting" class="username"></span>
+        <button id="logoutBtn" class="btn logout">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <section class="new-entry card">
+        <h2>✍️ New Journal Entry</h2>
+        <input id="title" placeholder="Title" class="input" />
+        <input id="mood" placeholder="Mood (optional)" class="input" />
+        <textarea id="content" placeholder="Write your thoughts here..." class="textarea"></textarea>
+        <button id="saveBtn" class="btn save">💾 Save Entry</button>
+      </section>
+
+      <section class="entries-section">
+        <h2>🗒️ Your Entries</h2>
+        <div id="entries" class="entries-container"></div>
+      </section>
+    </div>
+  </main>
+
+  <template id="entryTemplate">
+    <div class="entry-card card">
+      <div class="entry-header">
+        <h3 class="entry-title"></h3>
+        <p class="entry-date"></p>
+      </div>
+      <p class="entry-mood"></p>
+      <p class="entry-content"></p>
+      <div class="entry-actions">
+        <button class="btn edit-btn">✏️ Edit</button>
+        <button class="btn delete-btn">🗑️ Delete</button>
+      </div>
+    </div>
+  </template>
+
+  <footer>
+    <p>🌿 Journal App © 2025 | Built with ❤️ using Node.js & MongoDB</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

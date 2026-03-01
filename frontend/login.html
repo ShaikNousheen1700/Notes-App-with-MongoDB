@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Login - Online Journal</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* === Global Reset === */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+      background-attachment: fixed;
+    }
+
+    /* === Card === */
+    .card {
+      background: #ffffff;
+      width: 360px;
+      padding: 2rem 2.5rem;
+      border-radius: 1.5rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    /* === Heading === */
+    .card h2 {
+      color: #333;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      font-size: 1.8rem;
+    }
+
+    /* === Inputs === */
+    .card input {
+      width: 100%;
+      padding: 0.9rem;
+      margin-bottom: 1rem;
+      border: 1px solid #eee;
+      border-radius: 10px;
+      background: #f9f9f9;
+      font-size: 1rem;
+      transition: 0.3s;
+    }
+
+    .card input:focus {
+      outline: none;
+      border-color: #a8edea;
+      background: #fff;
+      box-shadow: 0 0 6px rgba(168, 237, 234, 0.4);
+    }
+
+    /* === Button === */
+    .card button {
+      width: 100%;
+      padding: 0.9rem;
+      background: linear-gradient(135deg, #a8edea, #fed6e3);
+      border: none;
+      color: #333;
+      font-weight: 600;
+      font-size: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .card button:hover {
+      transform: scale(1.03);
+      background: linear-gradient(135deg, #fed6e3, #a8edea);
+    }
+
+    /* === Link Text === */
+    .card p {
+      margin-top: 1rem;
+      color: #555;
+      font-size: 0.9rem;
+    }
+
+    .card a {
+      color: #a58cf4;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+
+    .card a:hover {
+      text-decoration: underline;
+      color: #9b7eda;
+    }
+
+    /* === Error Message === */
+    .msg {
+      margin-top: 0.8rem;
+      color: #e57373;
+      font-size: 0.85rem;
+      min-height: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Welcome Back 🌿</h2>
+    <input id="usernameOrEmail" placeholder="Username or email" />
+    <input id="password" type="password" placeholder="Password" />
+    <button id="loginBtn">Login</button>
+    <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+    <p id="msg" class="msg"></p>
+  </div>
+
+  <script>
+    const API = 'http://localhost:5000/api/auth';
+
+    document.getElementById('loginBtn').addEventListener('click', async () => {
+      const usernameOrEmail = document.getElementById('usernameOrEmail').value.trim();
+      const password = document.getElementById('password').value;
+      const msg = document.getElementById('msg');
+      msg.textContent = '';
+
+      if (!usernameOrEmail || !password) {
+        msg.textContent = 'Please fill in all fields 🌸';
+        return;
+      }
+
+      try {
+        const res = await fetch(API + '/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ usernameOrEmail, password })
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('username', data.username);
+          window.location.href = 'index.html';
+        } else {
+          msg.textContent = data.message || 'Login failed. Please try again 💫';
+        }
+      } catch (err) {
+        msg.textContent = 'Network error. Please try later.';
+      }
+    });
+  </script>
+</body>
+</html>
